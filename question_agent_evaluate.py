@@ -1,4 +1,5 @@
 import json
+import os
 from google import genai
 from z3 import *
 import ast
@@ -41,7 +42,7 @@ def basic_checks(q2: Dict[str, str])->bool:
     return False
 
 def get_gemini_prediction(prompt, model, text_format=None):
-    client = genai.Client(api_key="REDACTED")
+    client = genai.Client(api_key=os.environ.get("GOOGLE_API_KEY", ""))
 
     response = client.models.generate_content(
     model=model,
